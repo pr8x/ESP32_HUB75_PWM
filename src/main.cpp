@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include "LedPanel.h"
 
+#include <cmath>
+
 using namespace ESP32_LED_PANEL;
 
 extern "C" void app_main()
 {
-    // printf("Hello world!\n");
-    // fflush(stdout);
-
     LedPanel::Config panelSetup;
     panelSetup.r1 = GPIO_NUM_23;
     panelSetup.g1 = GPIO_NUM_22;
@@ -26,10 +25,19 @@ extern "C" void app_main()
     panelSetup.CLK = GPIO_NUM_2;
     panelSetup.OE  = GPIO_NUM_15;
 
-    LedPanel panel(panelSetup);
+    auto panel = new LedPanel(panelSetup);
+    panel->clear({0,0,0});
+
+    for(uint8_t y = 0; y < LedPanel::Height; ++y) 
+    {
+      for(uint8_t x = 0; x < LedPanel::Width; ++x) 
+      {
+        panel->setColor(x,y, {uint16_t(std::ceil(std::sin(x)) * 15), uint16_t(std::ceil(std::cos(y)) * 15), 0});
+      }
+    }
 
     for(;;) 
     {
-      panel.update();
+      panel->update();
     }
 }

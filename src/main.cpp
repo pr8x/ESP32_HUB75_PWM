@@ -26,8 +26,9 @@ extern "C" void app_main()
     panelSetup.OE  = GPIO_NUM_15;
 
     auto panel = new LedPanel(panelSetup);
-    panel->clear({0,0,0});
 
+    //DEMO
+    panel->clear({0,0,0});
     for(uint8_t y = 0; y < LedPanel::Height; ++y) 
     {
       for(uint8_t x = 0; x < LedPanel::Width; ++x) 

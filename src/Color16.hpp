@@ -2,7 +2,7 @@
 
 namespace ESP32_LED_PANEL 
 {
-	class Color16
+    class Color16
     {
     public:
         static constexpr uint16_t rmask = 0b0000000000001111;

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "LedPanel.h"
-
 #include <cmath>
 
 using namespace ESP32_LED_PANEL;

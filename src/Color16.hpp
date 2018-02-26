@@ -10,8 +10,7 @@ namespace ESP32_LED_PANEL
         static constexpr uint16_t bmask = 0b0000111100000000;
   
         inline Color16()
-          : _val(0)
-        {
+          : _val(0) {
         }
   
         inline Color16(const uint16_t r, const uint16_t g, const uint16_t b)
@@ -22,23 +21,19 @@ namespace ESP32_LED_PANEL
             _val |= (b << 8);
         }
   
-        inline uint16_t r() const
-        {
+        inline uint16_t r() const {
             return _val & rmask;
         }
   
-        inline uint16_t g() const
-        {
+        inline uint16_t g() const {
             return (_val & gmask) >> 4;
         }
   
-        inline uint16_t b() const
-        {
+        inline uint16_t b() const {
             return (_val & bmask) >> 8;
         }
   
-        inline uint16_t value() const
-        {
+        inline uint16_t value() const {
             return _val;
         }
   

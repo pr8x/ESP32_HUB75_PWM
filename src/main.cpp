@@ -28,16 +28,13 @@ extern "C" void app_main()
 
     //DEMO
     panel->clear({0,0,0});
-    for(uint8_t y = 0; y < LedPanel::Height; ++y) 
-    {
-      for(uint8_t x = 0; x < LedPanel::Width; ++x) 
-      {
+    for(uint8_t y = 0; y < LedPanel::Height; ++y) {
+      for(uint8_t x = 0; x < LedPanel::Width; ++x) {
         panel->setColor(x,y, {uint16_t(std::ceil(std::sin(x)) * 15), uint16_t(std::ceil(std::cos(y)) * 15), 0});
       }
     }
 
-    for(;;) 
-    {
+    for(;;) {
       panel->update();
     }
 }

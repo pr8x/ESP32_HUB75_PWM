@@ -34,12 +34,9 @@ namespace ESP32_LED_PANEL
         gpio_config(&io_conf);
     }
 
-    LedPanel::~LedPanel()
-    {
-    }
+    LedPanel::~LedPanel() = default;
 
-    void LedPanel::clear(const Color16& color)
-    {
+    void LedPanel::clear(const Color16& color) {
         for(uint8_t y = 0; y < Height; ++y) 
             for(uint8_t x = 0; x < Width; ++x) 
                 _buffer[x][y] = color;
@@ -53,32 +50,29 @@ namespace ESP32_LED_PANEL
         _buffer[x][y] = color;
     }
 
-    void LedPanel::update()
-    {
-        for(uint8_t y = 0; y < Height / 2; ++y)
-        {
-            for(uint8_t x = 0; x < Width; ++x) 
-            {
+    void LedPanel::update() {
+        for(uint8_t y = 0; y < Height / 2; ++y) {
+            for(uint8_t x = 0; x < Width; ++x) {
                 _mask = 0x0;
 
                 //R1,G1,B1
-                if (_buffer[x][y].r() > _layer)
+                if (_buffer[x][y].r())
                     _mask |= 0x1 << _config.r1;
 
-                if (_buffer[x][y].g() > _layer)
+                if (_buffer[x][y].g())
                     _mask |= 0x1 << _config.g1;
 
-                if (_buffer[x][y].b() > _layer)
+                if (_buffer[x][y].b())
                     _mask |= 0x1 << _config.b1;
 
                 //R2,G2,B2
-                if (_buffer[x][y + Height / 2].r() > _layer)
+                if (_buffer[x][y + Height / 2].r())
                     _mask |= 0x1 << _config.r2;
 
-                if (_buffer[x][y + Height / 2].g() > _layer)
+                if (_buffer[x][y + Height / 2].g())
                     _mask |= 0x1 << _config.g2;
 
-                if (_buffer[x][y + Height / 2].b() > _layer)
+                if (_buffer[x][y + Height / 2].b())
                     _mask |= 0x1 << _config.b2;
 
                 GPIO.out_w1tc = _rgbClearMask;
@@ -105,8 +99,5 @@ namespace ESP32_LED_PANEL
             GPIO.out_w1ts = (0x1 << _config.LAT);
             GPIO.out_w1tc = (0x1 << _config.LAT);
         }
-
-        if (_layer++ > 14) 
-            _layer = 0;
     }
 }
